@@ -97,7 +97,7 @@
                 <div class="mb-4 flex items-center justify-between">
                     <div>
                         <h2 class="text-lg font-bold text-slate-100 tracking-wide">Recent Tasks</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Real-time repository log updates.</p>
+                        <p class="text-xs text-slate-400 mt-0.5">Recent activity logs.</p>
                     </div>
                     <span class="text-xs px-2.5 py-1 bg-slate-950 border border-slate-800 rounded-full font-mono text-slate-400">
                         Total: {{ tasks?.total || 0 }}
@@ -158,7 +158,7 @@
             <div class="w-full flex flex-col gap-2 bg-slate-900/60 backdrop-blur-md border border-slate-800/80 rounded-xl p-3 shadow-xl">
                 
                 <div class="flex flex-col gap-1">
-                    <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider font-mono mb-0.5 block">Repository Transactions</span>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 tracking-wider font-mono mb-0.5 block">Task Actions</span>
                     <div class="w-full overflow-hidden h-[76px] flex flex-col justify-end pointer-events-none">
                         <transition-group name="log-list" tag="div" class="flex flex-col gap-1 w-full justify-end">
                             <div v-for="log in taskLogs" :key="log.id" class="flex items-center justify-between bg-slate-950/80 border border-slate-800/40 rounded px-2.5 py-1.5 text-[10px] font-mono">
@@ -248,18 +248,15 @@ const addToast = (message: string, type: 'success' | 'error' = 'success') => {
     }, 8000);
 };
 
-// Log tipleri ve iki ayrı bağımsız kuyruk dizisi (Queue)
 interface LogItem { id: number; method: 'GET' | 'POST'; endpoint: string; status: number; ms: number; success: boolean; }
 const taskLogs = ref<LogItem[]>([]);
 const heartbeatLogs = ref<LogItem[]>([]);
 
-// Task log kuyruğuna eleman ekleme (Max: 3 log saklar)
 const addTaskLog = (method: 'POST', endpoint: string, status: number, ms: number, success: boolean) => {
     taskLogs.value.push({ id: Date.now() + Math.random(), method, endpoint, status, ms, success });
     if (taskLogs.value.length > 3) taskLogs.value.shift();
 };
 
-// Heartbeat log kuyruğuna eleman ekleme (Max: 3 log saklar)
 const addHeartbeatLog = (method: 'GET', endpoint: string, status: number, ms: number, success: boolean) => {
     heartbeatLogs.value.push({ id: Date.now() + Math.random(), method, endpoint, status, ms, success });
     if (heartbeatLogs.value.length > 3) heartbeatLogs.value.shift();
