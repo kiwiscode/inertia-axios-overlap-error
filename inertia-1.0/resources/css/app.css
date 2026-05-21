@@ -1,0 +1,39 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+@import 'buttons';
+@import 'form';
+
+@import 'tailwindcss/utilities';
+
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 99px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #10b981;
+}
+
+.log-list-enter-active, .log-list-leave-active { transition: all 0.3s ease; }
+.log-list-enter-from { opacity: 0; transform: translateY(20px); }
+.log-list-leave-to { opacity: 0; transform: translateY(-20px); }
+.log-list-move { transition: transform 0.3s ease; }
+
+.toast-anim-enter-active, .toast-anim-leave-active {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-anim-enter-from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0) scale(0.95);
+}
+.toast-anim-leave-to {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0) scale(0.95);
+}
