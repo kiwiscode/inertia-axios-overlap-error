@@ -1,7 +1,4 @@
 import defaultTheme from 'tailwindcss/defaultTheme'
-import { createRequire } from 'module';
-
-const require = createRequire(import.meta.url);
 
 export default {
   content: ['./resources/**/*.{js,vue,blade.php}'],
